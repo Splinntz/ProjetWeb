@@ -21,6 +21,6 @@ class InscriptionController extends AbstractController
     {
         //return new Response('OMG! My first Symfony page! :D');
 
-        return $this->render('inscription/inscription.html.twig');
+        return $this->render('inscription/subscribe.html.twig');
     }
 }
