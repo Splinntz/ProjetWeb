@@ -6,4 +6,6 @@ composer install
 ```
 Sinon vous aurez des erreur dans votre projet !
 
-testBranche
+Ensuite pour avoir la base de donnée correcte merci de faire la commande :
+`php bin/console doctrine:migrations:migrate`
+Pour le moment il vous faudra la remplir manuellement. 
