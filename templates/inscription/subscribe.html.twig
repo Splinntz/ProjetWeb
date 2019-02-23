@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EasyAd - Inscription{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-sm-center my-5 ">
+        <div class="border border-primary p-2 rounded bg-light p-5">
+            {{ form_start(form) }}
+            <div class="form-group">
+                <h4>{{ form_label(form.login,'Login',{'label_attr':{'class':'text-dark'}}) }}</h4>
+                {{ form_widget(form.login,{'attr':{'class':'form-control','placeholder':'Entrez votre Login'}}) }}
+            </div>
+            <div class="form-group">
+                <h4>{{ form_label(form.password,'Password',{'label_attr':{'class':'text-dark'}}) }}</h4>
+                {{ form_widget(form.password,{'attr':{'class':'form-control','placeholder':'Entrez votre Mot de Passe','passwordType':'true'}}) }}
+                <small id="emailHelp" class="form-text text-muted">Faites un mot de passe compliqué !
+                </small>
+            </div>
+            <div class="row justify-content-sm-center">
+                {{ form_row(form.submit,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
+            </div>
+            {{ form_end(form) }}
+            <!--  <form>
+                  <div class="form-group text-dark">
+                      <label for="exampleInputEmail1"><h4>Pseudo</h4></label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                             placeholder="Entrer votre pseudo">
+                      <small id="emailHelp" class="form-text text-muted">Prenez un pseudo qui vous conviendra
+                          longtemps !
+                      </small>
+                  </div>
+                  <div class="form-group text-dark">
+                      <label for="exampleInputPassword1"><h4>Mot de passe</h4></label>
+                      <input type="password" class="form-control" id="exampleInputPassword1"
+                             placeholder="Mot de passe">
+                  </div>
+                  <div class="row justify-content-md-center  ">
+                      <button type="submit" class="btn btn-primary mx-auto"><h5>S'inscrire !</h5></button>
+                  </div>
+              </form> -->
+        </div>
+    </div>
+{% endblock %}
