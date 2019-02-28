@@ -19,6 +19,7 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
+
     // /**
     //  * @return Advert[] Returns an array of Advert objects
     //  */
