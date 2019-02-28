@@ -19,8 +19,7 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
-<<<<<<< HEAD
-=======
+
     // /**
     //  * @return Advert[] Returns an array of Advert objects
     //  */
@@ -49,5 +48,4 @@ class AdvertRepository extends ServiceEntityRepository
         ;
     }
     */
->>>>>>> e88f2f539204e84a0cc7a53fc79e51c16b0fc3d0
 }
