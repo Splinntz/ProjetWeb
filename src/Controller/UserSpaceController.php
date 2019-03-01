@@ -33,7 +33,7 @@ class UserSpaceController extends AbstractController
     {
         //return new Response('OMG! My first Symfony page! :D');
 
-        return $this->render('userSpace/userSpace.html.twig');
+        return $this->render('userSpace/userSpace.html.twig', ['user'=>$this->getUser()]);
     }
 
     /**
@@ -62,7 +62,7 @@ class UserSpaceController extends AbstractController
             $objectManager->persist($user);
             $objectManager->flush();
 
-            return $this->redirectToRoute('homepage', [
+            return $this->redirectToRoute('userSpace', [
                 'slug' => $user->getLogin(),
             ]);
         }
