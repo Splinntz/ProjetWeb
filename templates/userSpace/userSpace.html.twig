@@ -1,51 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}EasyAd{% endblock %}
 {% block body %}
     <div class="container m-5">
-        <div class="row p-3 m-2 border border-info">
-            <div class="col-sm-3 ">
-                Login
-            </div>
-            <div class="col-sm-3 offset-sm-3">
-                {login}
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-primary">Primary</button>
-            </div>
-        </div>
-        <div class="row p-3 m-2 border border-info">
-            <div class="col-sm-3 ">
-                note
-            </div>
-            <div class="col-sm-3 offset-sm-3">
-                {note}
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-primary">Primary</button>
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class=" p-2 m-2 border border-info d-flex justify-content-center">
+                    <div class="m-3">
+                        Login
+                    </div>
+                    <div class="m-3">
+                        {login}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row p-3 m-2 border border-info">
-            <div class="col-sm-3 ">
-                Age
-            </div>
-            <div class="col-sm-3 offset-sm-3">
-                {age}
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-primary">Primary</button>
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class=" p-2 m-2 border border-info d-flex justify-content-center">
+                    <div class="m-3">
+                        age
+                    </div>
+                    <div class="m-3">
+                        {age}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row p-3 m-2 border border-info">
-            <div class="col-sm-3 ">
-                Description
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class=" p-2 m-2 border border-info d-flex justify-content-center">
+                    <div class="m-3">
+                        descr
+                    </div>
+                    <div class="m-3">
+                        {descr}
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-3 offset-sm-3">
-                {Description}
+        </div>
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class=" p-2 m-2 border border-info d-flex justify-content-center">
+                    <div class="m-3">
+                        Note
+                    </div>
+                    <div class="m-3">
+                        {note}
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-primary">Primary</button>
-            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-warning m-1">Change Password</a>
+            <a class="btn btn-primary m-1" href="/modifyProfil">Modifier mon profil</a>
         </div>
     </div>
 {% endblock %}
