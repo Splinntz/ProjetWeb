@@ -44,6 +44,11 @@ class Advert
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="adverts")
+     */
+    private $idDiscipline;
+
 
     public function __construct()
     {
@@ -130,6 +135,18 @@ class Advert
                 $comment->setIdAdvert(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdDiscipline(): ?Discipline
+    {
+        return $this->idDiscipline;
+    }
+
+    public function setIdDiscipline(?Discipline $idDiscipline): self
+    {
+        $this->idDiscipline = $idDiscipline;
 
         return $this;
     }
