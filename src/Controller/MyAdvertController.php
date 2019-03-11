@@ -32,9 +32,8 @@ class MyAdvertController extends AbstractController
      */
     public function renderPage()
     {
-        dump($this->getDoctrine()->getRepository(Advert::class)->findAll());die;
         return $this->render('MyAdvert/myAdvert.html.twig', [
-            'listAdvert' => null
+            'listAdvert' => $this->getDoctrine()->getRepository(Advert::class)->findBy(['idUser' => '1'])
         ]);
     }
 
