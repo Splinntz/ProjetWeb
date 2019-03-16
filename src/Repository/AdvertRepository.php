@@ -19,6 +19,17 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
+   /* public function findByUserId($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.idUser = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }*/
+
 
     // /**
     //  * @return Advert[] Returns an array of Advert objects
@@ -48,4 +59,6 @@ class AdvertRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
 }

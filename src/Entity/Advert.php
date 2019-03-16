@@ -45,9 +45,10 @@ class Advert
     private $comments;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="adverts")
      */
-    private $Discipline = [];
+    private $idDiscipline;
+
 
     public function __construct()
     {
@@ -138,15 +139,16 @@ class Advert
         return $this;
     }
 
-    public function getDiscipline(): ?array
+    public function getIdDiscipline(): ?Discipline
     {
-        return $this->Discipline;
+        return $this->idDiscipline;
     }
 
-    public function setDiscipline(array $Discipline): self
+    public function setIdDiscipline(?Discipline $idDiscipline): self
     {
-        $this->Discipline = $Discipline;
+        $this->idDiscipline = $idDiscipline;
 
         return $this;
     }
+
 }
