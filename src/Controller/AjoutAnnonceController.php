@@ -15,9 +15,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class AjoutAnnonceController extends AbstractController
 {
+    /*private $user;
+
+
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->user = $tokenStorage->getToken()->getUser();
+    }
+    */
+
     /**
      * @Route("/ajoutannonce", name="addad")
      */
@@ -38,7 +48,6 @@ class AjoutAnnonceController extends AbstractController
         }
 
         return $this->render('/add/addad.html.twig', [
-            'form' => $form->createView(),
-        ]);
+            'form' => $form->createView()/*, 'user'=>$this->getUser()*/]);
     }
 }
