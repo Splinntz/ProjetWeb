@@ -8,4 +8,26 @@
             <p class="lead">En développement !</p>
         </div>
     </div>
+    <div class = "BesoindeCSSUrgent">
+        <table>
+            <thead>
+            <tr>
+                <td>Texte</td>
+                <td>Price</td>
+                <td>Place</td>
+                <td>Discipline</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for advert in adverts %}
+                <tr>
+                    <td>{{ advert.text }}</td>
+                    <td>{{ advert.price }}</td>
+                    <td>{{ advert.place }}</td>
+                    <td>{{ 'advert.idDiscipline' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
