@@ -1,36 +1,30 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Guillaumé
- * Date: 24/02/2019
- * Time: 14:09
+ * User: valen
+ * Date: 01/03/2019
+ * Time: 16:47
  */
 
 namespace App\Form;
 
 
-use App\Entity\Advert;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdvertType extends AbstractType
+class ProfilType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('text', TextareaType::class)
-            ->add('price', NumberType::class)
-            ->add('place', TextType::class)
-            ->add('idUser', NumberType::class)
-            ->add('idDiscipline', NumberType::class)
+            ->add('login', TextType::class)
+            ->add('age', TextType::class)
+            ->add('description', TextareaType::class)
             ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']])
         ;
     }
@@ -38,7 +32,7 @@ class AdvertType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Advert::class
+            'data_class' => User::class
         ]);
     }
 }
