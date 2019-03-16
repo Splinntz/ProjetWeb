@@ -44,6 +44,11 @@ class Advert
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $Discipline = [];
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -129,6 +134,18 @@ class Advert
                 $comment->setIdAdvert(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDiscipline(): ?array
+    {
+        return $this->Discipline;
+    }
+
+    public function setDiscipline(array $Discipline): self
+    {
+        $this->Discipline = $Discipline;
 
         return $this;
     }

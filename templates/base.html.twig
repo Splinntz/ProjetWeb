@@ -23,6 +23,7 @@
             <div class="navbar-nav mr-auto">
                     <a class="nav-item active nav-link" href="/">Accueil</a>
                     <a class="nav-item active nav-link" href="/">Mes Annonces</a>
+                    <a class="nav-item active nav-link" href="/userSpace">Mon espace perso</a>
             </div>
 
             <form class="form-inline">
@@ -44,7 +45,16 @@
         </div>
         {% endif %}
     </nav>{% endblock %}
-{% block body %}{% endblock %}
+{% block body %}
+    {% if  app.user is not null %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4"> Ici toutes les annonces !</h1>
+                <p class="lead">En développement !</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
