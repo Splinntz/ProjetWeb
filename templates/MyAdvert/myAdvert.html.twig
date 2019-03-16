@@ -3,9 +3,27 @@
 {% block title %}Mes annonces{% endblock %}
 
 {% block body %}
-
-    {% for advert in listAdvert %}
-        <li>{{ advert.id }}</li>
-    {% endfor %}
-
+        <table>
+            <thead>
+            <tr>
+                <td>Texte</td>
+                <td>Price</td>
+                <td>Place</td>
+                <td>Discipline</td>
+            </tr>
+            </thead>
+            <tbody>
+                {% for advert in listAdvert %}
+                <li>{{ advert.id }}</li>
+                <tr>
+                    <td>{{ advert.text }}</td>
+                    <td>{{ advert.price }}</td>
+                    <td>{{ advert.place }}</td>
+                    <td>{{ 'advert.idDiscipline' }}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 {% endblock %}
+
