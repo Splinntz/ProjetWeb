@@ -13,31 +13,37 @@
 <body class="h-100">
 {% block header %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.php">Easy Ads</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <a class="navbar-brand" href="index.php">Easy Ads</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {% if is_granted('ROLE_USER') %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-nav mr-auto">
+                    <a class="nav-item active nav-link" href="/">Accueil</a>
+                    <a class="nav-item active nav-link" href="/myAdvert">Mes Annonces</a>
+                    <a class="nav-item active nav-link" href="/userSpace">Mon espace perso</a>
+            </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto">
-            <a class="nav-item active nav-link" href="/">Accueil</a>
-            {% if  app.user is not null %}
-                <a class="nav-item active nav-link" href="/myAdvert">Mes Annonces</a>
-                <a class="nav-item active nav-link" href="/userSpace">Mon espace perso</a>
-            {% endif %}
+            <form class="form-inline">
+                <a class="btn btn-primary text-light m-1" href="/ajoutannonce" role="button">Création annonces</a>
+                <a class="nav-item active nav-link" href="/">Connecté en tant que : {{ app.user.login }}</a>
+                <a class="btn btn-warning text-dark m-1" href="{{ path('app_logout')}}" role="button">Deconnexion</a>
+            </form> 
         </div>
+        {% else %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-nav mr-auto">
+                    <a class="nav-item active nav-link" href="/">Accueil</a>
+            </div>
 
-        <form class="form-inline">
-            {% if  app.user is not null %}
-                <a class="btn btn-success text-light m-1" href="/ajoutannonce" role="button">Création annonces</a>
-            {% endif %}
-            {% if  app.user is null %}
+            <form class="form-inline">
                 <a class="btn btn-primary text-light m-1" href="/subscribe" role="button">Inscription</a>
                 <a class="btn btn-warning text-dark m-1" href="/app_login" role="button">Connexion</a>
-            {% endif %}
-        </form>
-    </div>
+            </form>
+        </div>
+        {% endif %}
     </nav>{% endblock %}
 {% block body %}
     {% if  app.user is not null %}
