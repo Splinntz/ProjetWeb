@@ -36,7 +36,7 @@ class MyAdvertController extends AbstractController
     public function renderPage()
     {
         return $this->render('MyAdvert/myAdvert.html.twig', [
-            'listAdvert' => $this->getDoctrine()->getRepository(Advert::class)->findBy(['idUser' => $this->user->getId()])
+            'listAdvert' => $this->user->getAdverts()
         ]);
     }
 
