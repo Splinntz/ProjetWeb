@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Created by PhpStorm.
@@ -71,4 +72,5 @@ class UserSpaceController extends AbstractController
             'form' => $form->createView(), 'user2' => $user
         ]);
     }
+
 }

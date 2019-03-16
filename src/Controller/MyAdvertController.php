@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MyAdvertController extends AbstractController
 {
 
-    private $listAdverts;
 
     /**
      * MyAdvertController constructor.

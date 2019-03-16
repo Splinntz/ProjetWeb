@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Created by PhpStorm.
@@ -35,4 +36,5 @@ class ProfilType extends AbstractType
             'data_class' => User::class
         ]);
     }
+
 }

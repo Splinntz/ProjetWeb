@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Advert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -28,6 +29,6 @@ class HomepageController extends AbstractController
     {
         //return new Response('OMG! My first Symfony page! :D');
 
-        return $this->render('homePage.html.twig');
+        return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll()]);
     }
 }
