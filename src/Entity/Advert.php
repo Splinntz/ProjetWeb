@@ -45,14 +45,15 @@ class Advert
     private $comments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="adverts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Discipline", inversedBy="adverts")
      */
-    private $idDiscipline;
+    private $disciplines;
 
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->disciplines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,16 +140,31 @@ class Advert
         return $this;
     }
 
-    public function getIdDiscipline(): ?Discipline
+    /**
+     * @return Collection|Discipline[]
+     */
+    public function getDisciplines(): Collection
     {
-        return $this->idDiscipline;
+        return $this->disciplines;
     }
 
-    public function setIdDiscipline(?Discipline $idDiscipline): self
+    public function addDiscipline(Discipline $discipline): self
     {
-        $this->idDiscipline = $idDiscipline;
+        if (!$this->disciplines->contains($discipline)) {
+            $this->disciplines[] = $discipline;
+        }
 
         return $this;
     }
+
+    public function removeDiscipline(Discipline $discipline): self
+    {
+        if ($this->disciplines->contains($discipline)) {
+            $this->disciplines->removeElement($discipline);
+        }
+
+        return $this;
+    }
+
 
 }

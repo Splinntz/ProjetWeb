@@ -23,7 +23,9 @@
                     <td>{{ advert.text }}</td>
                     <td>{{ advert.price }}</td>
                     <td>{{ advert.place }}</td>
-                    <td>{{ 'advert.idDiscipline' }}</td>
+                    {% for discipline in advert.disciplines %}
+                        <td>{{ discipline.name }}</td>
+                    {% endfor %}
                 </tr>
             {% endfor %}
             </tbody>

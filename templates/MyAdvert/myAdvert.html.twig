@@ -10,16 +10,19 @@
                 <td>Price</td>
                 <td>Place</td>
                 <td>Discipline</td>
+                <td>User</td>
             </tr>
             </thead>
             <tbody>
                 {% for advert in listAdvert %}
-                <li>{{ advert.id }}</li>
                 <tr>
                     <td>{{ advert.text }}</td>
                     <td>{{ advert.price }}</td>
                     <td>{{ advert.place }}</td>
-                    <td>{{ 'advert.idDiscipline' }}</td>
+                    {% for discipline in advert.disciplines %}
+                        <td>{{ discipline.name }}</td>
+                    {% endfor %}
+                    <td>{{ advert.idUser.login }}</td>
                     <td></td>
                 </tr>
                 {% endfor %}
