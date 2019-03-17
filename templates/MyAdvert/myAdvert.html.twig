@@ -19,8 +19,9 @@
                     <td>{{ advert.text }}</td>
                     <td>{{ advert.price }}</td>
                     <td>{{ advert.place }}</td>
-                    <td>{{ 'advert.idDiscipline' }}</td>
-                    <td></td>
+                    <td>{{ advert.idDiscipline.name }}</td>
+                    <td><a class="btn bg-danger text-light" href="/myAdvert/remove/{{ advert.id }}">Supprimer</a></td>
+                    <td><a class="btn bg-warning" {#href="/myAdvert/update/{{ advert.id }}"#}>Modifier</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

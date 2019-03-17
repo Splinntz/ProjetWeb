@@ -29,8 +29,7 @@ class AdvertType extends AbstractType
             ->add('text', TextareaType::class)
             ->add('price', NumberType::class)
             ->add('place', TextType::class)
-            ->add('idUser', NumberType::class)
-            ->add('idDiscipline', NumberType::class)
+
             ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']])
         ;
     }
