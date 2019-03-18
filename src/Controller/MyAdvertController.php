@@ -59,7 +59,7 @@ class MyAdvertController extends AbstractController
      * @Route("/myAdvert/update/{id}")
      * @ParamConverter("Advert", class="App\Entity\Advert")
      */
-   /* public function updateAdvert(Request $request,Advert $advert, ObjectManager $objectManager)
+   public function updateAdvert(Request $request,Advert $advert, ObjectManager $objectManager)
     {
         $form = $this->createForm(AdvertType::class, $advert);
 
@@ -74,6 +74,6 @@ class MyAdvertController extends AbstractController
         return $this->render('add/addad.html.twig',[
             'form' => $form->createView()
         ]);
-    }*/
+    }
 
 }

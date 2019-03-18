@@ -10,18 +10,23 @@
                 <td>Price</td>
                 <td>Place</td>
                 <td>Discipline</td>
+                <td>User</td>
             </tr>
             </thead>
             <tbody>
                 {% for advert in listAdvert %}
-                <li>{{ advert.id }}</li>
                 <tr>
                     <td>{{ advert.text }}</td>
                     <td>{{ advert.price }}</td>
                     <td>{{ advert.place }}</td>
-                    <td>{{ advert.idDiscipline.name }}</td>
+
                     <td><a class="btn bg-danger text-light" href="/myAdvert/remove/{{ advert.id }}">Supprimer</a></td>
-                    <td><a class="btn bg-warning" {#href="/myAdvert/update/{{ advert.id }}"#}>Modifier</a></td>
+                    <td><a class="btn bg-warning" href="/myAdvert/update/{{ advert.id }}">Modifier</a></td>
+                    {% for discipline in advert.disciplines %}
+                        <td>{{ discipline.name }}</td>
+                    {% endfor %}
+                    <td>{{ advert.idUser.login }}</td>
+                    <td></td>
                 </tr>
                 {% endfor %}
             </tbody>

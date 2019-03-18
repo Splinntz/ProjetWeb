@@ -10,10 +10,9 @@ namespace App\Form;
 
 
 use App\Entity\Advert;
-use App\Entity\User;
+use App\Entity\Discipline;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -29,6 +28,13 @@ class AdvertType extends AbstractType
             ->add('text', TextareaType::class)
             ->add('price', NumberType::class)
             ->add('place', TextType::class)
+
+            ->add('disciplines', EntityType::class, [
+                'class' => Discipline::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true
+            ])
 
             ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']])
         ;

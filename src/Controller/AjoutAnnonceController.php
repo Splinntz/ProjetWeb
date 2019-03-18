@@ -31,16 +31,18 @@ class AjoutAnnonceController extends AbstractController
     /**
      * @Route("/ajoutannonce", name="addad")
      */
-    public function create(Request $request, ObjectManager $objectManager)
+    public function create(Request $request, ObjectManager $objectManager, TokenStorageInterface $token)
     {
         $advert = new Advert();
 
         $form = $this->createForm(AdvertType::class, $advert);
 
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $advert->setIdUser($token->getToken()->getUser());
             $objectManager->persist($advert);
             $objectManager->flush();
 
