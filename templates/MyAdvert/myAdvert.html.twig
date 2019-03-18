@@ -3,30 +3,29 @@
 {% block title %}Mes annonces{% endblock %}
 
 {% block body %}
-        <table>
-            <thead>
-            <tr>
-                <td>Texte</td>
-                <td>Price</td>
-                <td>Place</td>
-                <td>Discipline</td>
-                <td>User</td>
-            </tr>
-            </thead>
-            <tbody>
-                {% for advert in listAdvert %}
-                <tr>
-                    <td>{{ advert.text }}</td>
-                    <td>{{ advert.price }}</td>
-                    <td>{{ advert.place }}</td>
-                    {% for discipline in advert.disciplines %}
-                        <td>{{ discipline.name }}</td>
-                    {% endfor %}
-                    <td>{{ advert.idUser.login }}</td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Ici toutes les annonces !</h1>
+            <p class="lead">En développement !</p>
+        </div>
+    </div>
+    <div class="d-flex flex-column  justify-content-center align-items-center h-100">
+        <div class="card-deck" style="width: 100%" align="center" >
+            {% for advert in adverts %}
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header">
+                        {% for discipline in advert.disciplines %}
+                            <h5 class="card-title">{{ discipline.name }}</h5>
+                        {% endfor %}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ advert.text }}</p>
+                        <h6 class="card-title">{{ advert.place }}</h6>
+                        <h6 class="card-title">{{ advert.price }} euros</h6>
+                    </div>
+                    <div class="card-footer">Seulement sur la page mes annonces pour les boutons</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
-
