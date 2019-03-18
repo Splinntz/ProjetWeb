@@ -5,14 +5,16 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: login
+                property: id
+        # used to reload user from session & other features (e.g. switch_user)
     encoders:
         # use your user class name here
         App\Entity\User:
             # bcrypt or argon2i are recommended
             # argon2i is more secure, but requires PHP 7.2 or the Sodium extension
-            algorithm: bcrypt
+            algorithm: argon2i
             cost: 12
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

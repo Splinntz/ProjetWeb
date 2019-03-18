@@ -25,7 +25,8 @@ class User implements UserInterface
     private $login;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @var string The hashed password
+     * @ORM\Column(type="string", length=150)
      */
     private $password;
 
@@ -67,9 +68,13 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
