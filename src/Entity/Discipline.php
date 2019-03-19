@@ -24,7 +24,7 @@ class Discipline
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Advert", mappedBy="idDiscipline")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Advert", mappedBy="disciplines")
      */
     private $adverts;
 
@@ -32,6 +32,8 @@ class Discipline
     {
         $this->adverts = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -62,7 +64,7 @@ class Discipline
     {
         if (!$this->adverts->contains($advert)) {
             $this->adverts[] = $advert;
-            $advert->setIdDiscipline($this);
+            $advert->addDiscipline($this);
         }
 
         return $this;
@@ -72,12 +74,13 @@ class Discipline
     {
         if ($this->adverts->contains($advert)) {
             $this->adverts->removeElement($advert);
-            // set the owning side to null (unless already changed)
-            if ($advert->getIdDiscipline() === $this) {
-                $advert->setIdDiscipline(null);
-            }
+            $advert->removeDiscipline($this);
         }
 
         return $this;
     }
+
+
+
+
 }

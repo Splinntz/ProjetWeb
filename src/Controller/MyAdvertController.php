@@ -11,18 +11,22 @@ namespace App\Controller;
 use App\Entity\Advert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 class MyAdvertController extends AbstractController
 {
 
 
+    private $user;
+
     /**
      * MyAdvertController constructor.
      */
-    public function __construct()
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
 
-
+        $this->user = $tokenStorage->getToken()->getUser();
     }
 
 
@@ -32,7 +36,7 @@ class MyAdvertController extends AbstractController
     public function renderPage()
     {
         return $this->render('MyAdvert/myAdvert.html.twig', [
-            'listAdvert' => $this->getDoctrine()->getRepository(Advert::class)->findBy(['idUser' => '1'])
+            'listAdvert' => $this->user->getAdverts()
         ]);
     }
 
