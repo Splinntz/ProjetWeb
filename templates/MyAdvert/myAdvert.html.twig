@@ -23,7 +23,10 @@
                         <h6 class="card-title">{{ advert.place }}</h6>
                         <h6 class="card-title">{{ advert.price }} euros</h6>
                     </div>
-                    <div class="card-footer">Seulement sur la page mes annonces pour les boutons</div>
+                    <div class="card-footer">
+                        <a class="btn bg-danger text-light" href="/myAdvert/remove/{{ advert.id }}">Supprimer</a>
+                        <a class="btn bg-warning" href="/myAdvert/update/{{ advert.id }}">Modifier</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
