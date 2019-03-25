@@ -20,13 +20,15 @@
                     <div class="col-sm-4 offset-sm-4 font-italic">
                         <div class="d-flex justify-content-end">
                             <h3>{{ tchat_message.content }}</h3>
+                            <h3>{{ tchat_message.date|date("m/d/Y") }} </h3>
+                            
                         </div>
-
                     </div>
                 </div>
            </div>
         </div>
         {% endfor %}
         <a class="btn btn-warning text-dark m-1" href="/answer.twig.html" role="button">Répondre</a>
+        <a class="btn btn-warning text-dark m-1" href="" role="button">Refresh</a>
     </div>
 {% endblock %}

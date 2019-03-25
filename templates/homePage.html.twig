@@ -21,6 +21,9 @@
                         <h6 class="card-title">{{ advert.place }}</h6>
                         <h6 class="card-title">{{ advert.price }} euros</h6>
                     </div>
+                    {% if is_granted('ROLE_USER') %}
+                    <a class="btn btn-warning text-dark m-1" href="/tchat/{{ advert.IdUser.login }}_{{ app.user.login }}" role="button">Répondre</a>
+                    {% endif %}
                 </div>
         {% endfor %}
         </div>
