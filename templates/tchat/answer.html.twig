@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EasyAd - Answer{% endblock %}
+
+{% block body %}
+<div class="row justify-content-sm-center my-5 ">
+    <div class="border border-primary p-2 rounded bg-light p-5">
+        {{ form_start(form) }}
+        <div class="form-group">
+            <h>{{ form_label(form.content,'Contenu',{'label_attr':{'class':'text-dark'}}) }}</h>
+            {{ form_widget(form.content,{'attr':{'class':'form-control','placeholder':'Entrez le message','rows' : '3'}}) }}
+        <div class="row justify-content-sm-center">
+            {{ form_row(form.submit,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EasyAds - Tchat{% endblock %}
+
+{% block body %}
+<div class="d-flex flex-column  justify-content-center align-items-center h-100">
+        <div class="card-deck" style="width: 100%" align="center" >
+            
+        </div>
+    </div>
+    <div class="container m-5 ">
+        {% for tchat_message in tchats_messages %}
+            
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <div class=" p-2 m-2 border border-info row bg-light text-primary">
+                    <div class="col-sm-4">
+                        <h2><p class="card-text">{{ tchat_message.nameUserName }} : </p>  </h2>
+                    </div>
+                    <div class="col-sm-4 offset-sm-4 font-italic">
+                        <div class="d-flex justify-content-end">
+                            <h3>{{ tchat_message.content }}</h3>
+                            <h3>{{ tchat_message.date|date("M/d/y  H:i:s") }} </h3>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+        {% endfor %}
+        <a class="btn btn-warning text-dark m-1" href="/answer" role="button">Répondre</a>
+        <a class="btn btn-warning text-dark m-1" href="" role="button">Refresh</a>
+    </div>
+{% endblock %}
