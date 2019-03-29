@@ -45,7 +45,7 @@ class SubscribeController extends AbstractController
             $objectManager->persist($user);
             $objectManager->flush();
 
-            return $this->redirectToRoute('homepage', [
+            return $this->redirectToRoute('app_login', [
                 'slug' => $user->getLogin(),
             ]);
         }

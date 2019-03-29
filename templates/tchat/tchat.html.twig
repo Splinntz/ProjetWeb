@@ -9,36 +9,19 @@
         </div>
     </div>
     <div class="container m-5 ">
-        {% for tchat_message in tchats_messages %}
-            
+        {% for advert in adverts %}
+
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
                 <div class=" p-2 m-2 border border-info row bg-light text-primary">
                     <div class="col-sm-4">
-                        <h2><p class="card-text">{{ tchat_message.nameUserName }} : </p>  </h2>
-                    </div>
-                    <div class="col-sm-4 offset-sm-4 font-italic">
-                        <div class="d-flex justify-content-end">
-                            <h3>{{ tchat_message.content }}</h3>
-                            <h3>{{ tchat_message.date|date("M/d/y  H:i:s") }} </h3>
+                        <h2><p class="card-text">Souhaitez vous commencez la discussion avec : {{ advert.IdUser.login }} : </p>  </h2>
+                        <a class="btn btn-warning text-dark m-1" href="/tchat/{{ advert.IdUser.id }}_{{ app.user.id }}" role="button">Répondre</a>
                         </div>
                     </div>
                 </div>
            </div>
         </div>
         {% endfor %}
-        <div class="row justify-content-sm-center my-5 ">
-            <div class="border border-primary p-2 rounded bg-light p-5">
-                {{ form_start(form) }}
-                <div class="form-group">
-                    <h>{{ form_label(form.content,'Contenu',{'label_attr':{'class':'text-dark'}}) }}</h>
-                    {{ form_widget(form.content,{'attr':{'class':'form-control','placeholder':'Entrez le message','rows' : '3'}}) }}
-                <div class="row justify-content-sm-center">
-                    {{ form_row(form.submit,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
-                </div>
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </div>
-    <a class="btn btn-warning text-dark m-1" href="" role="button">Refresh</a>
+    
 {% endblock %}
