@@ -166,6 +166,11 @@ class User implements UserInterface
     private $age;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $rateNumber;
+
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -231,6 +236,18 @@ class User implements UserInterface
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getRateNumber(): ?int
+    {
+        return $this->rateNumber;
+    }
+
+    public function setRateNumber(int $rateNumber): self
+    {
+        $this->rateNumber = $rateNumber;
 
         return $this;
     }

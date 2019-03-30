@@ -17,6 +17,7 @@ use Doctrine\DBAL\Types\IntegerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -50,8 +51,9 @@ class UserSpaceController extends AbstractController
         $defaultData = ['rate' => 0];
         $form = $this->createFormBuilder($defaultData)
             ->add('rate', NumberType::class)
-
+            ->add('submit', SubmitType::class)
             ->getForm();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

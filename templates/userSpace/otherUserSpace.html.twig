@@ -21,9 +21,10 @@
     </fieldset>
 
     {{ form_start(form) }}
-    <div class="form-group">
-        {{ form_widget(form.rate,{'attr':{'class':'hidden'}}) }}
-    </div>
+
+    {{ form_widget(form.rate,{'attr':{'class':'hidden'}}) }}
+    {{ form_row(form.submit,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
+
     {{ form_end(form) }}
 {% endblock %}
 {% block stylesheets %}
