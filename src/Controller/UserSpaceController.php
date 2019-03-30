@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ProfilType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,6 +35,17 @@ class UserSpaceController extends AbstractController
         //return new Response('OMG! My first Symfony page! :D');
 
         return $this->render('userSpace/userSpace.html.twig', ['user'=>$this->getUser()]);
+    }
+
+    /**
+     * @Route("/otherUserSpace/{id}", name="otherUserSpace")
+     * @ParamConverter("User", class="App\Entity\User")
+     */
+    public function readOtherUser(User $user)
+    {
+        //return new Response('OMG! My first Symfony page! :D');
+
+        return $this->render('userSpace/otherUserSpace.html.twig', ['user'=>$user]);
     }
 
     /**
