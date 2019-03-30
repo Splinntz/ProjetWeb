@@ -17,13 +17,15 @@ class RatingUserService
     {
         $nbRatings = $user->getNumberRatings();
         $userNote = $user->getNote();
-        if ($nbRatings > 0) {
+        if ($nbRatings > 0 && $rate!=0) {
 
             $user->setNote(($userNote*$nbRatings +  $rate) / (double) ++$nbRatings);
             $user->setNumberRatings($nbRatings);
-        } else {
+        } else if($nbRatings==0 && $rate!=0){
             $user->setNumberRatings(++$nbRatings);
             $user->setNote($rate);
+        }else{
+            $user->setNote($user->getNote());
         }
 
     }

@@ -49,7 +49,7 @@ class UserSpaceController extends AbstractController
 
         $defaultData = ['rate' => 0];
         $form = $this->createFormBuilder($defaultData)
-            ->add('rate', NumberType::class)
+            ->add('rate', NumberType::class, ['attr'=>['value'=>0]])
             ->add('submit', SubmitType::class)
             ->getForm();
 

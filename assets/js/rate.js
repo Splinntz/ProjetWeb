@@ -15,8 +15,3 @@ $(document).ready(function(){
 
 
 });
-
-
-function responseMessage(msg) {
-   console.log(msg);
-}

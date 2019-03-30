@@ -53,13 +53,17 @@
                 </div>
                 <div class="col-sm-4 offset-sm-4 font-italic">
                     <div class="d-flex justify-content-end">
-                        <h3>{{ (user.getNote())|number_format(2, '.', ',') }}/5</h3>
+                        <div class="ratings">
+                            <div class="empty-stars"></div>
+                            <div class="full-stars"
+                                 style="width:{{ (user.getNote())|number_format(2, '.', ',') *100/5.0 }}%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% if  currentUser != user%} {#{% if rating is defined and rating == true %}#}
+    {% if  currentUser != user %} {#{% if rating is defined and rating == true %}#}
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
                 <div class=" p-2 m-2 border border-info text-danger bg-light">
