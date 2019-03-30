@@ -11,9 +11,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfilType;
+use App\Form\RateType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Types\IntegerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -41,11 +44,24 @@ class UserSpaceController extends AbstractController
      * @Route("/otherUserSpace/{id}", name="otherUserSpace")
      * @ParamConverter("User", class="App\Entity\User")
      */
-    public function readOtherUser(User $user)
+    public function readOtherUser(Request $request, User $user)
     {
-        //return new Response('OMG! My first Symfony page! :D');
 
-        return $this->render('userSpace/otherUserSpace.html.twig', ['user'=>$user]);
+        $defaultData = ['rate' => 0];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('rate', NumberType::class)
+
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // data is an array with "name", "email", and "message" keys
+            $data = $form->getData();
+        }
+
+        return $this->render('userSpace/otherUserSpace.html.twig', [
+            'form' => $form->createView(), 'user' => $user
+        ]);
     }
 
     /**
