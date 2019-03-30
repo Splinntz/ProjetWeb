@@ -79,7 +79,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
