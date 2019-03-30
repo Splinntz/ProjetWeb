@@ -60,12 +60,12 @@ class UserSpaceController extends AbstractController
             $data = $form->get('rate')->getData();
             $convert->addRating($data,$user);
             $objectManager->flush();
-            return $this->redirectToRoute('homepage');
+//            return $this->redirectToRoute('homepage');
 
         }
 
         return $this->render('userSpace/otherUserSpace.html.twig', [
-            'form' => $form->createView(), 'user' => $user
+            'form' => $form->createView(), 'user' => $user, 'currentUser'=>$this->getUser()
         ]);
     }
 
