@@ -41,7 +41,8 @@ class SubscribeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //dump($form->getData());
             //die;
-
+            $user->setNote(0);
+            $user->setNumberRatings(0);
             $objectManager->persist($user);
             $objectManager->flush();
 

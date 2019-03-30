@@ -11,9 +11,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfilType;
-use App\Form\RateType;
+use App\Services\RatingUserService;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\DBAL\Types\IntegerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -45,7 +44,7 @@ class UserSpaceController extends AbstractController
      * @Route("/otherUserSpace/{id}", name="otherUserSpace")
      * @ParamConverter("User", class="App\Entity\User")
      */
-    public function readOtherUser(Request $request, User $user)
+    public function readOtherUser(Request $request, User $user, RatingUserService $convert, ObjectManager $objectManager)
     {
 
         $defaultData = ['rate' => 0];
@@ -57,8 +56,12 @@ class UserSpaceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // data is an array with "name", "email", and "message" keys
-            $data = $form->getData();
+
+            $data = $form->get('rate')->getData();
+            $convert->addRating($data,$user);
+            $objectManager->flush();
+            return $this->redirectToRoute('homepage');
+
         }
 
         return $this->render('userSpace/otherUserSpace.html.twig', [
