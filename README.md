@@ -15,9 +15,7 @@ N'oubliez pas de configurer votre adresse de base de donnée dans le fichier .en
 
 Il va  falloir utiliser yarn pour modifier le css et le javascript (et oui c'est chaud).
 Après avoir fait un :
-``` 
-composer install 
-```
+``` composer install ```
 
 il va falloir installer yarn ici : 
 https://yarnpkg.com/lang/fr/docs/install/#windows-stable
