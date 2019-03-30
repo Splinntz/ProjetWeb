@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\TchatMessage;
 use App\Form\TchatMessageType;
+use App\Entity\Advert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,12 +44,14 @@ class TchatMessageController extends AbstractController
             $date = new \DateTime();
             $date->setTimestamp(123456);
             $tchatMessage->setDate($date);
+            $tchatMessage->setIdTchatId(1);
             $objectManager->persist($tchatMessage);
             $objectManager->flush();
         }
         return $this->render('tchat/tchatMessage.html.twig',[
             'tchats_messages' => $this->getDoctrine()->getRepository(TchatMessage::class)->findAll(),
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll()
             ]);
     }
 }    

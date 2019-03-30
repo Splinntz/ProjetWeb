@@ -30,8 +30,8 @@ class TchatController extends AbstractController
     public function create(Request $request, ObjectManager $objectManager, TokenStorageInterface $token)
     {
         $tchat = new Tchat();
-        $tchat->setIdUserId1($token->getToken()->getUser()->getId());
-        $tchat->setIdUserId2(19);
+        $tchat->setIdUserId1(2);
+        $tchat->setIdUserId2($token->getToken()->getUser()->getId());
         $objectManager->persist($tchat);
         $objectManager->flush();
 

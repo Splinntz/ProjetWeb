@@ -5,7 +5,9 @@
 {% block body %}
 <div class="d-flex flex-column  justify-content-center align-items-center h-100">
         <div class="card-deck" style="width: 100%" align="center" >
-            
+            {% for advert in adverts %}
+            <h2><p class="card-text">Discussion entre {{ advert.IdUser.login }} et {{ app.user.login }}</p>  </h2>
+            {% endfor %}
         </div>
     </div>
     <div class="container m-5 ">
