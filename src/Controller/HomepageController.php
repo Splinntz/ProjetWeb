@@ -43,7 +43,6 @@ class HomepageController extends AbstractController
     {
 
         if ( !empty($_POST['dateChoice'])){
-            dump($_POST['dateChoice']);
             $date = new \DateTime($_POST['dateChoice']);
         } else {
             $date = null;
