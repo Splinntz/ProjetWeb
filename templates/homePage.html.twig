@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -9,11 +7,9 @@
             <p class="lead">En développement !</p>
         </div>
     </div>
-    <div class="container">
-        <div class ="div row flex">
+    <div class="d-flex flex-column  justify-content-center align-items-center h-100">
+        <div class="card-deck" style="width:80%" align="center" >
             {% for advert in adverts %}
-
-          <div class ="col-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header">
                         {% for discipline in advert.disciplines %}
@@ -27,12 +23,11 @@
                         <h6 class="card-title"><a href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
                     </div>
                     {% if is_granted('ROLE_USER') %}
-                            <a class="btn btn-warning text-dark m-1" href="/tchat" role="button">Répondre</a>
+                        <a class="btn btn-warning text-dark m-1" href="/tchat" role="button">Répondre</a>
                     {% endif %}
                 </div>
             {% endfor %}
         </div>
-    </div>
     </div>
 {% endblock %}
 
