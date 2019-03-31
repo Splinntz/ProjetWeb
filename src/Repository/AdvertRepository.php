@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Advert;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
+use Elastica\Processor\Date;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -26,6 +29,27 @@ class AdvertRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findWithFilter($date,$price,$disciplines){
+
+
+        $query =  $this->createQueryBuilder('a');
+
+        if($date != null){
+
+            $dateAux = new \DateTime($date->format("Y-m-d"));
+            $dateAux->format("Y-m-d");
+            $query->andWhere('a.date >= :valDate1')->setParameter('valDate1',$dateAux);
+        }
+        if ($price != null){
+            $query->andWhere('a.price <= :val+10')->andWhere('a.price >= :val-10')->setParameter('val',$price);
+        }
+        if ($disciplines != null){
+            $query->innerJoin('a.disciplines', 'p','WITH', 'p.name=:valdis')->setParameter('valdis',$disciplines);
+        }
+
+        return $query->getQuery()->getResult();
     }
 
 

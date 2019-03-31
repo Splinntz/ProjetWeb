@@ -49,6 +49,11 @@ class Advert
      */
     private $disciplines;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
 
     public function __construct()
     {
@@ -162,6 +167,18 @@ class Advert
         if ($this->disciplines->contains($discipline)) {
             $this->disciplines->removeElement($discipline);
         }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

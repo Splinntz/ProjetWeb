@@ -7,6 +7,36 @@
             <p class="lead">En développement !</p>
         </div>
     </div>
+    <form method="POST" action="/form">
+        <fieldset>
+            <legend style="text-align: center">Filtrer les annonces</legend>
+            <div style="text-align: center" class="row">
+                <div class="col">
+                    <label for="checkbox">Discipline</label>
+                    {% for discipline in disciplines %}
+                        <input type="checkbox" id="checkbox" name="disciplinesCheckbox" value="{{ discipline.name }}"> {{ discipline.name }}
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    <label for="Pricerange">Prix</label>
+                    <input type="range" id="Pricerange" class="custom-range" value="-1" name="price" oninput="textRange.value = Pricerange.value">
+                    <span class="badge badge-primary"><output id="textRange"></output></span>
+                </div>
+                <div class="col">
+                    <label for="dateChoice">Date publication</label>
+                    <input type="date"id="dateChoice" name="dateChoice">
+                </div>
+            </div>
+            <div style="text-align: center"> <br><br> <button  class=" btn-primary" >Filtrer</button></div>
+        </fieldset>
+    </form>
+    <center>
+        <br>
+    <button type="button" class="btn btn-danger" onclick="">Reinitialiser les filtres</button>
+        <br>
+        <br>
+    </center>
+    <div class="container">
     <div class="d-flex flex-column  justify-content-center align-items-center h-100">
         <div class="card-deck" style="width:80%" align="center" >
             {% for advert in adverts %}
@@ -29,7 +59,14 @@
             {% endfor %}
         </div>
     </div>
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+            $('#Pricerange').slider({});
+        </script>
+    {% endblock %}
 {% endblock %}
+
+
 
 
 
