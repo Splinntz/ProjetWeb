@@ -36,8 +36,7 @@ class AdvertType extends AbstractType
                 'expanded' => true
             ])
 
-            ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']])
-        ;
+            ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

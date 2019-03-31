@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190324194728 extends AbstractMigration
+final class Version20190326092939 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -25,6 +25,7 @@ final class Version20190324194728 extends AbstractMigration
         $this->addSql('CREATE TABLE tchat_message (id INT AUTO_INCREMENT NOT NULL, content LONGTEXT NOT NULL, date DATETIME NOT NULL, name_user_name VARCHAR(255) NOT NULL, id_tchat_id INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE INDEX id_user_id_1 ON tchat (id_user_id_1)');
         $this->addSql('CREATE INDEX id_user_id_2 ON tchat (id_user_id_2)');    
+
     }
 
     public function down(Schema $schema) : void
@@ -35,5 +36,6 @@ final class Version20190324194728 extends AbstractMigration
         $this->addSql('DROP TABLE tchat_message');
         $this->addSql('DROP INDEX id_user_id_1 ON tchat');
         $this->addSql('DROP INDEX id_user_id_2 ON tchat');       
+
     }
 }
