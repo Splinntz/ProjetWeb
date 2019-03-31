@@ -11,8 +11,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfilType;
+use App\Services\RatingUserService;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -34,6 +38,35 @@ class UserSpaceController extends AbstractController
         //return new Response('OMG! My first Symfony page! :D');
 
         return $this->render('userSpace/userSpace.html.twig', ['user'=>$this->getUser()]);
+    }
+
+    /**
+     * @Route("/otherUserSpace/{id}", name="otherUserSpace")
+     * @ParamConverter("User", class="App\Entity\User")
+     */
+    public function readOtherUser(Request $request, User $user, RatingUserService $convert, ObjectManager $objectManager)
+    {
+
+        $defaultData = ['rate' => 0];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('rate', NumberType::class, ['attr'=>['value'=>0]])
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->get('rate')->getData();
+            $convert->addRating($data,$user);
+            $objectManager->flush();
+//            return $this->redirectToRoute('homepage');
+
+        }
+
+        return $this->render('userSpace/otherUserSpace.html.twig', [
+            'form' => $form->createView(), 'user' => $user, 'currentUser'=>$this->getUser()
+        ]);
     }
 
     /**

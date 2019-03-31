@@ -41,11 +41,12 @@ class SubscribeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //dump($form->getData());
             //die;
-
+            $user->setNote(0);
+            $user->setNumberRatings(0);
             $objectManager->persist($user);
             $objectManager->flush();
 
-            return $this->redirectToRoute('homepage', [
+            return $this->redirectToRoute('app_login', [
                 'slug' => $user->getLogin(),
             ]);
         }

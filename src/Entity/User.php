@@ -30,7 +30,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $note;
 
@@ -79,12 +79,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
 
-    public function setNote(?int $note): self
+    public function setNote(?float $note): self
     {
         $this->note = $note;
 
@@ -166,6 +166,11 @@ class User implements UserInterface
     private $age;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $numberRatings;
+    
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -234,4 +239,18 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    public function getNumberRatings(): ?int
+    {
+        return $this->numberRatings;
+    }
+
+    public function setNumberRatings(int $numberRatings): self
+    {
+        $this->numberRatings = $numberRatings;
+
+        return $this;
+    }
+
 }
