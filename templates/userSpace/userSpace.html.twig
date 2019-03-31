@@ -53,8 +53,11 @@
                     </div>
                     <div class="col-sm-4 offset-sm-4 font-italic">
                         <div class="d-flex justify-content-end">
-                            <div class="full-stars"
-                                 style="width:{{ (user.getNote())|number_format(2, '.', ',') *100/5.0 }}%"></div>
+                            <div class="ratings">
+                                <div class="empty-stars"></div>
+                                <div class="full-stars"
+                                     style="width:{{ (user.getNote())|number_format(2, '.', ',') *100/5.0 }}%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,6 +70,7 @@
     </div>
     </div>
 {% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet"
@@ -74,7 +78,7 @@
     {{ encore_entry_link_tags('rate') }}
 {% endblock %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('rate') }}
-    {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('rate') }}
+{% endblock %}
