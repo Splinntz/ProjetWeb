@@ -44,7 +44,7 @@ class HomepageController extends AbstractController
 
         if ( !empty($_POST['dateChoice'])){
             dump($_POST['dateChoice']);
-            $date = new Date($_POST['dateChoice'],[]);
+            $date = new \DateTime($_POST['dateChoice']);
         } else {
             $date = null;
         }
@@ -62,7 +62,7 @@ class HomepageController extends AbstractController
             $disciplines = null;
         }
 
-        dump($date, "price = ".$price, $disciplines);
+        dump($date,$price, $disciplines);
 
         $listeAdverts = $this->getDoctrine()->getRepository(Advert::class)->findWithFilter($date,$price,$disciplines);
 
