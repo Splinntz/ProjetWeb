@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes tchats{% endblock %}
+
+{% block body %}
+
+    {% for tchat in listTchats %}
+        {{ tchat.id_user_id_1 }}
+    {% endfor %}
+
+{% endblock %}

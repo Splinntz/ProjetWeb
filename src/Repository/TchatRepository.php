@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Tchat;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @method Tchat|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +36,16 @@ class TchatRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getUser($user){
+
+        return $this->createQueryBuilder('t')
+            ->select('t.id_user_id_1')
+            ->andWhere('t.id_user_id_1 = :val')
+            ->setParameter('val', $user->getId())
+            ->getQuery()
+            ->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Tchat
