@@ -62,8 +62,6 @@ class HomepageController extends AbstractController
             $disciplines = null;
         }
 
-        dump($date,$price, $disciplines);
-
         $listeAdverts = $this->getDoctrine()->getRepository(Advert::class)->findWithFilter($date,$price,$disciplines);
 
         return $this->render( 'homePage.html.twig', ['adverts' => $listeAdverts,
