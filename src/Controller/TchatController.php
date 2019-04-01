@@ -73,6 +73,42 @@ class TchatController extends AbstractController
             ]);
     
     }
+
+
+    /**
+     * @Route("/tchatAux/{id}")
+     */
+    public function createAux($id, TokenStorageInterface $token,Request $request , ObjectManager $objectManager){
+
+
+        $myTchat = $this->getDoctrine()->getRepository(Tchat::class)->findOneBy(['id'=> $id]);
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //dump($form->getData());
+            //die;
+
+            $message->setDate(new \DateTime('now'));
+            $message->setUser($token->getToken()->getUser());
+            $message->setTchat($myTchat);
+
+            $objectManager->persist($message);
+            $objectManager->flush();
+
+        }
+
+
+
+        return $this->render('tchat/tchatMessage.html.twig',[
+            'listMessage' => $myTchat->getMessages(),
+            'user1' => $myTchat->getUser1(),
+            'user2' =>$myTchat->getUserAux(),
+            'form' => $form->createView()
+        ]);
+    }
     
     
 }
