@@ -47,8 +47,9 @@
                         <h6 class="card-title"><a href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
                     </div>
                     <div class="card-footer">
-                        <a class="btn bg-danger text-light" href="/myAdvert/remove/{{ advert.id }}">Supprimer</a>
-                        <a class="btn bg-warning" href="/myAdvert/update/{{ advert.id }}">Modifier</a>
+                        {% if is_granted('ROLE_USER') %}
+                            <a class="btn btn-warning text-dark m-1" href="/tchat" role="button">Répondre</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
