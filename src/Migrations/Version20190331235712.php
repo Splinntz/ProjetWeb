@@ -24,7 +24,6 @@ final class Version20190331235712 extends AbstractMigration
 
         $this->addSql('CREATE TABLE tchat (id INT AUTO_INCREMENT NOT NULL, user1_id INT NOT NULL, user2_id INT NOT NULL, INDEX IDX_8EA99CA456AE248B (user1_id), INDEX IDX_8EA99CA4441B8B65 (user2_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE tchat ADD CONSTRAINT FK_8EA99CA456AE248B FOREIGN KEY (user1_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE tchat ADD CONSTRAINT FK_8EA99CA4441B8B65 FOREIGN KEY (user2_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE advert DROP FOREIGN KEY FK_54F1F40B1B7AF664');
         $this->addSql('DROP INDEX IDX_54F1F40B1B7AF664 ON advert');
         $this->addSql('ALTER TABLE advert DROP id_discipline_id');
