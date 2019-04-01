@@ -32,7 +32,6 @@ class TchatController extends AbstractController
     {
 
         $advert = $this->getDoctrine()->getRepository(Advert::class)->findOneBy(['id'=> $id]);
-        dump($advert->getIdUser(), $token->getToken()->getUser());
         $myTchat = $this->getDoctrine()->getRepository(Tchat::class)->findOneBy(['advert'=>$advert, 'user1'=>$advert->getIdUser(), 'userAux'=>$token->getToken()->getUser()]);
 
         if ($myTchat == null){
