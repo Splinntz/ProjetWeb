@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container m-5 ">
+<div class="container m-5 border border-info rounded p-5 bg-dark">
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            <div class=" p-2 m-2 border border-info row bg-light text-primary">
-                <div class="col-sm-4">
+            <div class=" p-2 m-2 border border-info rounded row bg-light text-primary">
+                <div class="col-sm-4 text-uppercase">
                     <h2>Login :</h2>
                 </div>
-                <div class="col-sm-4 offset-sm-4 font-italic">
+                <div class="col-sm-4 offset-sm-4">
                     <div class="d-flex justify-content-end">
                         <h3>{{ user.getLogin() }}</h3>
                     </div>
@@ -19,11 +19,11 @@
     </div>
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            <div class=" p-2 m-2 border border-info row bg-light text-secondary">
-                <div class="col-sm-4">
+            <div class=" p-2 m-2 border border-info rounded row bg-light text-secondary">
+                <div class="col-sm-4 text-uppercase">
                     <h2> Age :</h2>
                 </div>
-                <div class="col-sm-4 offset-sm-4 font-italic">
+                <div class="col-sm-4 offset-sm-4">
                     <div class="d-flex justify-content-end">
                         <h3> {{ user.getAge() }}</h3>
                     </div>
@@ -33,11 +33,11 @@
     </div>
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            <div class=" p-2 m-2 border border-info row bg-light text-info">
-                <div class="col-sm-3">
+            <div class=" p-2 m-2 border border-info rounded row bg-light text-info">
+                <div class="col-sm-4 text-uppercase">
                     <h3>Description :</h3>
                 </div>
-                <div class="col-sm-9 font-italic text-break text-truncate">
+                <div class="col-sm-8 font-italic text-break text-truncate">
                     <div class="d-flex justify-content-end">
                         {{ user.getDescription() }}
                     </div>
@@ -47,11 +47,11 @@
     </div>
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            <div class=" p-2 m-2 border border-info row text-danger bg-light">
-                <div class="col-sm-4">
+            <div class=" p-2 m-2 border border-info rounded row text-danger bg-light">
+                <div class="col-sm-4 text-uppercase">
                     <h2>Note :</h2>
                 </div>
-                <div class="col-sm-4 offset-sm-4 font-italic">
+                <div class="col-sm-4 offset-sm-4 ">
                     <div class="d-flex justify-content-end">
                         <div class="ratings">
                             <div class="empty-stars"></div>
@@ -66,29 +66,29 @@
     {% if  currentUser != user %} {#{% if rating is defined and rating == true %}#}
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
-                <div class=" p-2 m-2 border border-info text-danger bg-light">
-                    <fieldset class="rating">
+                <div class=" p-2 m-2 border border-info text-danger bg-light d-flex justify-content-center">
+                    <fieldset class="rating ">
                         <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5"
-                                                                                       title="Awesome - 5 stars"></label>
+                                                                                       title="Parfait !"></label>
                         {#<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>#}
                         <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4"
-                                                                                       title="Pretty good - 4 stars"></label>
+                                                                                       title="Bien"></label>
                         {#<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>#}
                         <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3"
-                                                                                       title="Meh - 3 stars"></label>
+                                                                                       title="Moyen"></label>
                         {#<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>#}
                         <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2"
-                                                                                       title="Kinda bad - 2 stars"></label>
+                                                                                       title="Mauvais"></label>
                         {#<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>#}
                         <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1"
-                                                                                       title="Sucks big time - 1 star"></label>
+                                                                                       title="Execrable"></label>
                         {#<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>#}
                     </fieldset>
 
                     {{ form_start(form) }}
 
                     {{ form_widget(form.rate,{'attr':{'class':'hidden'}}) }}
-                    {{ form_row(form.submit,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
+                    {{ form_row(form.voter,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
 
                     {{ form_end(form) }}
 
