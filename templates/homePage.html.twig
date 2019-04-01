@@ -46,10 +46,11 @@
                         <h6 class="card-title text-warning">{{ advert.price }} euros</h6>
                         <h6 class="card-title"><a href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
                     </div>
+
                     <div class="card-footer">
-                        {% if is_granted('ROLE_USER') %}
-                            <a class="btn btn-warning text-dark m-1" href="/tchat" role="button">Répondre</a>
-                        {% endif %}
+                    {% if is_granted('ROLE_USER') %}
+                        <a class="btn btn-warning text-dark m-1" href="/tchat/{{ advert.id }}" role="button">Répondre</a>
+                    {% endif %}
                     </div>
                 </div>
             {% endfor %}
