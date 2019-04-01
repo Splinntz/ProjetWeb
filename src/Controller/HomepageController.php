@@ -31,9 +31,19 @@ class HomepageController extends AbstractController
     public function read()
     {
         //return new Response('OMG! My first Symfony page! :D');
+        $securityContext = $this->container->get('security.authorization_checker');
 
-        return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll(),
-            'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll()]);
+        if($securityContext->isGranted('ROLE_USER')){
+            return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll(),
+                'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll(),
+                'advutilisateur'=>$this->user->getAdverts()]);
+        }
+
+        if($securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')){
+            return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll(),
+                'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll()]);
+        }
+
     }
 
     /**
@@ -64,7 +74,8 @@ class HomepageController extends AbstractController
         $listeAdverts = $this->getDoctrine()->getRepository(Advert::class)->findWithFilter($date,$price,$disciplines);
 
         return $this->render( 'homePage.html.twig', ['adverts' => $listeAdverts,
-            'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll()]);
+            'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll(),
+            'advutilisateur'=>$this->user->getAdverts()]);
 
     }
 }
