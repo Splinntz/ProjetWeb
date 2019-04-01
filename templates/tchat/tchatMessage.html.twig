@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EasyAds - Tchat{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-column  justify-content-center align-items-center h-100">
+        <div style="text-align: center">
+            <br>
+            <h2>Discussion entre {{ user1.login }} et {{ user2.login }}</h2>
+        </div>
+    </div>
+    <div class="container m-5 ">
+    {% for tchat_message in listMessage %}
+
+        <div class="d-flex flex-column  justify-content-center align-items-center h-100" style="text-align: center">
+            <div style="margin: 5px;">
+                <div class="card bg-light ">
+                    <div class="card-header">
+                        {{ tchat_message.user.login }}
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-text">
+                            {{ tchat_message.text }}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        {{ tchat_message.date|date("M/d/y  H:i:s") }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    <div class="row justify-content-sm-center my-5 ">
+        <div class="border border-primary p-2 rounded bg-light p-5">
+            {{ form_start(form) }}
+            <div class="form-group">
+                <h>{{ form_label(form.text,'Contenu',{'label_attr':{'class':'text-dark'}}) }}</h>
+                {{ form_widget(form.text,{'attr':{'class':'form-control','placeholder':'Entrez le message','rows' : '3'}}) }}
+                <div class="row justify-content-sm-center">
+                    {{ form_row(form.submit,{'attr':{'class':'btn btn-primary mx-auto'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-warning text-dark m-1" href="" role="button">Refresh</a>
+{% endblock %}

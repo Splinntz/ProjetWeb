@@ -43,6 +43,7 @@ class AjoutAnnonceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $advert->setIdUser($token->getToken()->getUser());
+            $advert->setDate(new \DateTime('now'));
             $objectManager->persist($advert);
             $objectManager->flush();
 

@@ -49,11 +49,22 @@ class Advert
      */
     private $disciplines;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tchat", mappedBy="advert", orphanRemoval=true)
+     */
+    private $tchats;
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->disciplines = new ArrayCollection();
+        $this->tchats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,6 +172,49 @@ class Advert
     {
         if ($this->disciplines->contains($discipline)) {
             $this->disciplines->removeElement($discipline);
+        }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tchat[]
+     */
+    public function getTchats(): Collection
+    {
+        return $this->tchats;
+    }
+
+    public function addTchat(Tchat $tchat): self
+    {
+        if (!$this->tchats->contains($tchat)) {
+            $this->tchats[] = $tchat;
+            $tchat->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchat(Tchat $tchat): self
+    {
+        if ($this->tchats->contains($tchat)) {
+            $this->tchats->removeElement($tchat);
+            // set the owning side to null (unless already changed)
+            if ($tchat->getAdvert() === $this) {
+                $tchat->setAdvert(null);
+            }
         }
 
         return $this;

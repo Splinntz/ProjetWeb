@@ -30,7 +30,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $note;
 
@@ -48,6 +48,9 @@ class User implements UserInterface
     {
         $this->comments = new ArrayCollection();
         $this->adverts = new ArrayCollection();
+        $this->tchats = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->TchatsAux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,12 +82,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
 
-    public function setNote(?int $note): self
+    public function setNote(?float $note): self
     {
         $this->note = $note;
 
@@ -166,6 +169,26 @@ class User implements UserInterface
     private $age;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $numberRatings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tchat", mappedBy="user1", orphanRemoval=true)
+     */
+    private $tchats;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="user", orphanRemoval=true)
+     */
+    private $messages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tchat", mappedBy="userAux", orphanRemoval=true)
+     */
+    private $TchatsAux;
+    
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -234,4 +257,112 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    public function getNumberRatings(): ?int
+    {
+        return $this->numberRatings;
+    }
+
+    public function setNumberRatings(int $numberRatings): self
+    {
+        $this->numberRatings = $numberRatings;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tchat[]
+     */
+    public function getTchats(): Collection
+    {
+        return $this->tchats;
+    }
+
+    public function addTchat(Tchat $tchat): self
+    {
+        if (!$this->tchats->contains($tchat)) {
+            $this->tchats[] = $tchat;
+            $tchat->setUser1($this);
+        }
+
+        return $this;
+    }
+
+
+    public function removeTchat(Tchat $tchat): self
+    {
+        if ($this->tchats->contains($tchat)) {
+            $this->tchats->removeElement($tchat);
+            // set the owning side to null (unless already changed)
+            if ($tchat->getUser1() === $this) {
+                $tchat->setUser1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tchat[]
+     */
+    public function getTchatsAux(): Collection
+    {
+        return $this->TchatsAux;
+    }
+
+    public function addTchatsAux(Tchat $tchatsAux): self
+    {
+        if (!$this->TchatsAux->contains($tchatsAux)) {
+            $this->TchatsAux[] = $tchatsAux;
+            $tchatsAux->setUserAux($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchatsAux(Tchat $tchatsAux): self
+    {
+        if ($this->TchatsAux->contains($tchatsAux)) {
+            $this->TchatsAux->removeElement($tchatsAux);
+            // set the owning side to null (unless already changed)
+            if ($tchatsAux->getUserAux() === $this) {
+                $tchatsAux->setUserAux(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

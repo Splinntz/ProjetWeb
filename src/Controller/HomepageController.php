@@ -10,7 +10,10 @@ namespace App\Controller;
 
 
 use App\Entity\Advert;
+use App\Entity\Discipline;
+use Elastica\Processor\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -28,7 +31,51 @@ class HomepageController extends AbstractController
     public function read()
     {
         //return new Response('OMG! My first Symfony page! :D');
+        $securityContext = $this->container->get('security.authorization_checker');
 
-        return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll()]);
+        if($securityContext->isGranted('ROLE_USER')){
+            return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll(),
+                'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll(),
+                'advutilisateur'=>$this->user->getAdverts()]);
+        }
+
+        if($securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')){
+            return $this->render('homePage.html.twig', ['adverts' => $this->getDoctrine()->getRepository(Advert::class)->findAll(),
+                'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll()]);
+        }
+
+    }
+
+    /**
+     * @Route("/form")
+     */
+    public function filter(Request $request)
+    {
+
+        if ( !empty($_POST['dateChoice'])){
+            $date = new \DateTime($_POST['dateChoice']);
+        } else {
+            $date = null;
+        }
+        if (!empty($_POST['price'])){
+
+            $price = $_POST['price'];
+
+        } else {
+            $price = null;
+        }
+        if (isset($_POST['disciplinesCheckbox'])){
+            $disciplines = $_POST['disciplinesCheckbox'] ;
+
+        } else {
+            $disciplines = null;
+        }
+
+        $listeAdverts = $this->getDoctrine()->getRepository(Advert::class)->findWithFilter($date,$price,$disciplines);
+
+        return $this->render( 'homePage.html.twig', ['adverts' => $listeAdverts,
+            'disciplines' => $this->getDoctrine()->getRepository(Discipline::class)->findAll(),
+            'advutilisateur'=>$this->user->getAdverts()]);
+
     }
 }

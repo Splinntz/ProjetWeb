@@ -24,6 +24,9 @@ class AdvertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
+
         $builder
             ->add('text', TextareaType::class)
             ->add('price', NumberType::class)
@@ -36,8 +39,7 @@ class AdvertType extends AbstractType
                 'expanded' => true
             ])
 
-            ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']])
-        ;
+            ->add('submit', SubmitType::class,['attr'=>['class'=>'btn btn-primary mx-auto']]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

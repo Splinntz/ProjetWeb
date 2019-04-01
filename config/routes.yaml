@@ -2,3 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+tchat:
+    path: /tchat.twig.html
+    controller: App\Controller\TchatController::number

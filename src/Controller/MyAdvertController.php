@@ -40,7 +40,7 @@ class MyAdvertController extends AbstractController
     public function renderPage()
     {
         return $this->render('MyAdvert/myAdvert.html.twig', [
-            'listAdvert' => $this->user->getAdverts()
+            'adverts' => $this->user->getAdverts()
         ]);
     }
 
