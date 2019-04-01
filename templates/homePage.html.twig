@@ -7,38 +7,32 @@
             <p class="lead">En développement !</p>
         </div>
     </div>
-    <form method="POST" action="/form">
-        <fieldset>
-            <legend style="text-align: center">Filtrer les annonces</legend>
+    <form method="POST" class="bg-light p-3 m-5 border round" action="/form">
+        <fieldset >
+            <legend class="font-weight-bold text-success" style="text-align: center">Filtrer les annonces</legend>
             <div style="text-align: center" class="row">
-                <div class="col">
-                    <label for="checkbox">Discipline</label>
+                <div class="col-sm-4">
+                    <label class="text-uppercase font-weight-bold text-primary" for="checkbox">Discipline :</label>
                     {% for discipline in disciplines %}
-                        <input type="checkbox" id="checkbox" name="disciplinesCheckbox" value="{{ discipline.name }}"> {{ discipline.name }}
+                        <input class="checkbox text-capitalize" type="checkbox" id="checkbox" name="disciplinesCheckbox" value="{{ discipline.name }}"> {{ discipline.name }}
                     {% endfor %}
                 </div>
-                <div class="col">
-                    <label for="Pricerange">Prix</label>
+                <div class="col-sm-4">
+                    <label class="text-uppercase font-weight-bold text-primary" for="Pricerange">Prix</label>
                     <input type="range" id="Pricerange" class="custom-range" value="-1" name="price" oninput="textRange.value = Pricerange.value">
                     <span class="badge badge-primary"><output id="textRange"></output></span>
                 </div>
-                <div class="col">
+                <div class="col-sm-4 text-uppercase font-weight-bold text-primary">
                     <label for="dateChoice">Date publication</label>
-                    <input type="date"id="dateChoice" name="dateChoice">
+                    <input class="form-control" type="date"id="dateChoice" name="dateChoice">
                 </div>
             </div>
-            <div style="text-align: center"> <br><br> <button  class=" btn-primary" >Filtrer</button></div>
+            <div style="text-align: center"> <br><br> <button  class=" btn btn-success" >Rechercher !</button></div>
         </fieldset>
     </form>
-    <center>
-        <br>
-    <button type="button" class="btn btn-danger" onclick="">Reinitialiser les filtres</button>
-        <br>
-        <br>
-    </center>
-    <div class="container">
-    <div class="d-flex flex-column  justify-content-center align-items-center h-100">
-        <div class="card-deck" style="width:80%" align="center" >
+
+    <div class="d-flex flex-column pt-4 justify-content-center align-items-center h-100">
+        <div class="card-deck" style="width: 100%" align="center" >
             {% for advert in adverts %}
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header">
@@ -46,15 +40,18 @@
                             <h5 class="card-title">{{ discipline.name }}</h5>
                         {% endfor %}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-capitalize">
                         <p class="card-text">{{ advert.text }}</p>
                         <h6 class="card-title">{{ advert.place }}</h6>
-                        <h6 class="card-title">{{ advert.price }} euros</h6>
+                        <h6 class="card-title text-warning">{{ advert.price }} euros</h6>
                         <h6 class="card-title"><a href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
                     </div>
+
+                    <div class="card-footer">
                     {% if is_granted('ROLE_USER') %}
                         <a class="btn btn-warning text-dark m-1" href="/tchat/{{ advert.id }}" role="button">Répondre</a>
                     {% endif %}
+                    </div>
                 </div>
             {% endfor %}
         </div>

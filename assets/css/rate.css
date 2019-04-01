@@ -63,7 +63,7 @@ fieldset, label { margin: 0; padding: 0; }
 .empty-stars:before,
 .full-stars:before {
     content: "\2605\2605\2605\2605\2605";
-    font-size: 14pt;
+    font-size: 25pt;
 }
 
 .empty-stars:before {

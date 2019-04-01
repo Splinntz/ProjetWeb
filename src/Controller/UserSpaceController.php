@@ -44,13 +44,13 @@ class UserSpaceController extends AbstractController
      * @Route("/otherUserSpace/{id}", name="otherUserSpace")
      * @ParamConverter("User", class="App\Entity\User")
      */
-    public function readOtherUser(Request $request, User $user, RatingUserService $convert, ObjectManager $objectManager)
+    public function readOtherUser(Request $request, User $user, RatingUserService $ratingUserService, ObjectManager $objectManager)
     {
 
         $defaultData = ['rate' => 0];
         $form = $this->createFormBuilder($defaultData)
             ->add('rate', NumberType::class, ['attr'=>['value'=>0]])
-            ->add('submit', SubmitType::class)
+            ->add('voter', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
@@ -58,7 +58,7 @@ class UserSpaceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->get('rate')->getData();
-            $convert->addRating($data,$user);
+            $ratingUserService->addRating($data,$user);
             $objectManager->flush();
 //            return $this->redirectToRoute('homepage');
 
