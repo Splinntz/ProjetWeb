@@ -48,6 +48,8 @@ class User implements UserInterface
     {
         $this->comments = new ArrayCollection();
         $this->adverts = new ArrayCollection();
+        $this->tchats = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,6 +171,16 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $numberRatings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tchat", mappedBy="user1", orphanRemoval=true)
+     */
+    private $tchats;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="user", orphanRemoval=true)
+     */
+    private $messages;
     
     /**
      * A visual identifier that represents this user.
@@ -249,6 +261,68 @@ class User implements UserInterface
     public function setNumberRatings(int $numberRatings): self
     {
         $this->numberRatings = $numberRatings;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tchat[]
+     */
+    public function getTchats(): Collection
+    {
+        return $this->tchats;
+    }
+
+    public function addTchat(Tchat $tchat): self
+    {
+        if (!$this->tchats->contains($tchat)) {
+            $this->tchats[] = $tchat;
+            $tchat->setUser1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchat(Tchat $tchat): self
+    {
+        if ($this->tchats->contains($tchat)) {
+            $this->tchats->removeElement($tchat);
+            // set the owning side to null (unless already changed)
+            if ($tchat->getUser1() === $this) {
+                $tchat->setUser1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
+            }
+        }
 
         return $this;
     }

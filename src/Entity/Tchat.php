@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,40 +19,83 @@ class Tchat
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tchats")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_user_id_1;
+    private $user1;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_user_id_2;
+    private $user2;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="tchat", orphanRemoval=true)
+     */
+    private $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdUserId1(): ?int
+    public function getUser1(): ?User
     {
-        return $this->id_user_id_1;
+        return $this->user1;
     }
 
-    public function setIdUserId1(int $id_user_id_1): self
+    public function setUser1(?User $user1): self
     {
-        $this->id_user_id_1 = $id_user_id_1;
+        $this->user1 = $user1;
 
         return $this;
     }
 
-    public function getIdUserId2(): ?int
+    public function getUser2(): ?User
     {
-        return $this->id_user_id_2;
+        return $this->user2;
     }
 
-    public function setIdUserId2(int $id_user_id_2): self
+    public function setUser2(?User $user2): self
     {
-        $this->id_user_id_2 = $id_user_id_2;
+        $this->user2 = $user2;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setTchat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getTchat() === $this) {
+                $message->setTchat(null);
+            }
+        }
 
         return $this;
     }
