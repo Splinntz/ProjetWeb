@@ -50,6 +50,7 @@ class User implements UserInterface
         $this->adverts = new ArrayCollection();
         $this->tchats = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->TchatsAux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,6 +182,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="user", orphanRemoval=true)
      */
     private $messages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tchat", mappedBy="userAux", orphanRemoval=true)
+     */
+    private $TchatsAux;
     
     /**
      * A visual identifier that represents this user.
@@ -283,6 +289,7 @@ class User implements UserInterface
         return $this;
     }
 
+
     public function removeTchat(Tchat $tchat): self
     {
         if ($this->tchats->contains($tchat)) {
@@ -321,6 +328,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($message->getUser() === $this) {
                 $message->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tchat[]
+     */
+    public function getTchatsAux(): Collection
+    {
+        return $this->TchatsAux;
+    }
+
+    public function addTchatsAux(Tchat $tchatsAux): self
+    {
+        if (!$this->TchatsAux->contains($tchatsAux)) {
+            $this->TchatsAux[] = $tchatsAux;
+            $tchatsAux->setUserAux($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchatsAux(Tchat $tchatsAux): self
+    {
+        if ($this->TchatsAux->contains($tchatsAux)) {
+            $this->TchatsAux->removeElement($tchatsAux);
+            // set the owning side to null (unless already changed)
+            if ($tchatsAux->getUserAux() === $this) {
+                $tchatsAux->setUserAux(null);
             }
         }
 

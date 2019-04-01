@@ -23,10 +23,11 @@ class myTchat extends AbstractController
     public function create(TokenStorageInterface $token){
 
 
-        $listTchatsAux = $this->getDoctrine()->getRepository(Tchat::class)->getUser($token->getToken()->getUser());
+        $listTchatsAux = $token->getToken()->getUser()->getTchats();
 
         return $this->render('myTchats/myTchat.html.twig', [
-            'listTchats' => $listTchatsAux
+            'listTchats' => $listTchatsAux,
+            'listTchatsAux' => $token->getToken()->getUser()->getTchatsAux()
         ]);
 
     }

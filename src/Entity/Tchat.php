@@ -24,16 +24,23 @@ class Tchat
      */
     private $user1;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user2;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="tchat", orphanRemoval=true)
      */
     private $messages;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="tchats")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $advert;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="TchatsAux")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $userAux;
 
     public function __construct()
     {
@@ -53,18 +60,6 @@ class Tchat
     public function setUser1(?User $user1): self
     {
         $this->user1 = $user1;
-
-        return $this;
-    }
-
-    public function getUser2(): ?User
-    {
-        return $this->user2;
-    }
-
-    public function setUser2(?User $user2): self
-    {
-        $this->user2 = $user2;
 
         return $this;
     }
@@ -96,6 +91,30 @@ class Tchat
                 $message->setTchat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdvert(): ?Advert
+    {
+        return $this->advert;
+    }
+
+    public function setAdvert(?Advert $advert): self
+    {
+        $this->advert = $advert;
+
+        return $this;
+    }
+
+    public function getUserAux(): ?User
+    {
+        return $this->userAux;
+    }
+
+    public function setUserAux(?User $userAux): self
+    {
+        $this->userAux = $userAux;
 
         return $this;
     }

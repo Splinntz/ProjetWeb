@@ -5,7 +5,13 @@
 {% block body %}
 
     {% for tchat in listTchats %}
-        {{ tchat.id_user_id_1 }}
+        {{ tchat.user1.login }}
+        {{ tchat.userAux.login }}
+    {% endfor %}
+
+    {% for tchat in listTchatsAux%}
+        {{ tchat.user1.login }}
+        {{ tchat.userAux.login }}
     {% endfor %}
 
 {% endblock %}
