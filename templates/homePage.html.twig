@@ -8,58 +8,71 @@
         </div>
     </div>
     <form method="POST" class="bg-light p-3 m-5 border round" action="/form">
-        <fieldset >
+        <fieldset>
             <legend class="font-weight-bold text-success" style="text-align: center">Filtrer les annonces</legend>
             <div style="text-align: center" class="row">
                 <div class="col-sm-4">
                     <label class="text-uppercase font-weight-bold text-primary" for="checkbox">Discipline :</label>
                     {% for discipline in disciplines %}
-                        <input class="checkbox text-capitalize" type="checkbox" id="checkbox" name="disciplinesCheckbox" value="{{ discipline.name }}"> {{ discipline.name }}
+                        <input class="checkbox text-capitalize" type="checkbox" id="checkbox" name="disciplinesCheckbox"
+                               value="{{ discipline.name }}"> {{ discipline.name }}
                     {% endfor %}
                 </div>
                 <div class="col-sm-4">
                     <label class="text-uppercase font-weight-bold text-primary" for="Pricerange">Prix</label>
-                    <input type="range" id="Pricerange" class="custom-range" value="-1" name="price" oninput="textRange.value = Pricerange.value">
+                    <input type="range" id="Pricerange" class="custom-range" value="-1" name="price"
+                           oninput="textRange.value = Pricerange.value">
                     <span class="badge badge-primary"><output id="textRange"></output></span>
                 </div>
                 <div class="col-sm-4 text-uppercase font-weight-bold text-primary">
                     <label for="dateChoice">Date publication</label>
-                    <input class="form-control" type="date"id="dateChoice" name="dateChoice">
+                    <input class="form-control" type="date" id="dateChoice" name="dateChoice">
                 </div>
             </div>
-            <div style="text-align: center"> <br><br> <button  class=" btn btn-success" >Rechercher !</button></div>
+            <div style="text-align: center"><br><br>
+                <button class=" btn btn-success">Rechercher !</button>
+            </div>
         </fieldset>
     </form>
 
 
     <div class="d-flex flex-column pt-4 justify-content-center align-items-center h-100">
-        <div class="card-deck" style="width: 100%" align="center" >
+        <div class="card-deck" style="width: 100%" align="center">
             {% for advert in adverts %}
                 {% set val = 0 %}
-                <div class ="col-3">
-                    <div class="card text-white bg-dark mb-3 text-center" >
-                        <div class="card-header" >
+                <div class="col-3">
+                    <div class="card text-white bg-dark mb-3 text-center">
+                        <div class="card-header">
                             {% for discipline in advert.disciplines %}
-                                <h5 class="card-title"><span class="badge badge-primary">{{ discipline.name }}</span></h5>
+                                <h5 class="card-title"><span class="badge badge-primary">{{ discipline.name }}</span>
+                                </h5>
                             {% endfor %}
                         </div>
                         <div class="card-body text-capitalize">
-                        <p class="card-text">{{ advert.text }}</p>
-                        <h6 class="card-title">{{ advert.place }}</h6>
-                        <h6 class="card-title text-warning">{{ advert.price }} euros</h6>
-                        <h6 class="card-title"><a href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
-                    </div>
-                        {% if (is_granted('ROLE_USER')) %}
+                            <p class="card-text">{{ advert.text }}</p>
+                            <h6 class="card-title">{{ advert.place }}</h6>
+                            <h6 class="card-title text-warning">{{ advert.price }} euros</h6>
+                            <h6 class="card-title"><a
+                                        href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
+                        </div>
+                        {% if not (is_granted('ROLE_ADMIN')) %}
                             {% for advertuser in advutilisateur %}
                                 {% if advertuser.idUser == advert.idUser %}
                                     {% set val = 1 %}
                                 {% endif %}
                             {% endfor %}
                             {% if val == 0 %}
-                            <div class="card-footer">
-                                <a class="btn btn-warning text-dark m-1" href="/tchat/{{ advert.id }}" role="button">Répondre</a>
+                                <div class="card-footer">
+                                    <a class="btn btn-warning text-dark m-1" href="/tchat/{{ advert.id }}"
+                                       role="button">Répondre</a>
                                 </div>
                             {% endif %}
+                        {% else %}
+                            <div class="card-footer">
+                                <a class="btn bg-danger text-light"
+                                   href="/myAdvert/remove/{{ advert.id }}">Supprimer</a>
+                                <a class="btn bg-warning" href="/myAdvert/update/{{ advert.id }}">Modifier</a>
+                            </div>
                         {% endif %}
                     </div>
                 </div>

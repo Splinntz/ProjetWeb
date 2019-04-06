@@ -52,14 +52,18 @@ class MyAdvertController extends AbstractController
     {
         $objectManager->remove($advert);
         $objectManager->flush();
-        return $this->redirectToRoute('advertRead');
+        if ($this->isGranted('ROLE_ADMIN'))
+        {
+            return $this->redirectToRoute('homepage');
+        } else
+            return $this->redirectToRoute('advertRead');
     }
 
     /**
      * @Route("/myAdvert/update/{id}")
      * @ParamConverter("Advert", class="App\Entity\Advert")
      */
-   public function updateAdvert(Request $request,Advert $advert, ObjectManager $objectManager)
+    public function updateAdvert(Request $request, Advert $advert, ObjectManager $objectManager)
     {
         $form = $this->createForm(AdvertType::class, $advert);
 
@@ -68,10 +72,13 @@ class MyAdvertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $objectManager->flush();
-
-            return $this->redirectToRoute('advertRead');
+            if ($this->isGranted('ROLE_ADMIN'))
+            {
+                return $this->redirectToRoute('homepage');
+            } else
+                return $this->redirectToRoute('advertRead');
         }
-        return $this->render('add/addad.html.twig',[
+        return $this->render('add/addad.html.twig', [
             'form' => $form->createView()
         ]);
     }
