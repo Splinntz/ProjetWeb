@@ -16,9 +16,6 @@
                     {% for discipline in disciplines %}
                         <input class="checkbox text-capitalize" type="checkbox" id="checkbox" name="disciplinesCheckbox"
                                value="{{ discipline.name }}"> {{ discipline.name }}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a class="btn bg-danger text-light" href="/homePage/removediscipline/{{ discipline.id }}">Supprimer</a>
-                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="col-sm-4">
