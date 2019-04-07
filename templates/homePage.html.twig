@@ -58,7 +58,7 @@
                             <h6 class="card-title"><a
                                         href="/otherUserSpace/{{ advert.idUser.id }}">{{ advert.idUser.login }}</a></h6>
                         </div>
-                        {% if not (is_granted('ROLE_ADMIN')) %}
+                        {% if  (is_granted('ROLE_USER')) %}
                             {% for advertuser in advutilisateur %}
                                 {% if advertuser.idUser == advert.idUser %}
                                     {% set val = 1 %}
@@ -70,12 +70,13 @@
                                        role="button">Répondre</a>
                                 </div>
                             {% endif %}
-                        {% else %}
-                            <div class="card-footer">
-                                <a class="btn bg-danger text-light"
-                                   href="/myAdvert/remove/{{ advert.id }}">Supprimer</a>
-                                <a class="btn bg-warning" href="/myAdvert/update/{{ advert.id }}">Modifier</a>
-                            </div>
+                            {% if (is_granted('ROLE_ADMIN'))%}
+                                <div class="card-footer">
+                                    <a class="btn bg-danger text-light"
+                                       href="/myAdvert/remove/{{ advert.id }}">Supprimer</a>
+                                    <a class="btn bg-warning" href="/myAdvert/update/{{ advert.id }}">Modifier</a>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
