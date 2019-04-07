@@ -9,14 +9,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class AjoutDisciplineController extends AbstractController
+class GestionDisciplineController extends AbstractController
 {
+
+
     /**
-     * @Route("/admin/ajoutdiscipline")
+     * @Route("/admin/gestiondiscipline")
      */
-    public function create(Request $request, ObjectManager $objectManager, TokenStorageInterface $token)
+    public function create(){
+        return $this->render('/admin/gestiondiscipline.html.twig', ['listdiscipline'=>$this->getDoctrine()->getRepository(Discipline::class)->findAll()]);
+    }
+
+    /**
+     * @Route("/admin/adddiscipline")
+     */
+    public function addDiscipline(Request $request, ObjectManager $objectManager)
     {
         $discipline = new Discipline();
 
@@ -32,8 +42,21 @@ class AjoutDisciplineController extends AbstractController
 
             return $this->redirectToRoute('homepage');
         }
-
         return $this->render('/admin/adddiscipline.html.twig', [
             'form' => $form->createView()]);
     }
+
+    /**
+     * @Route("/admin/removediscipline/{id}")
+     * @ParamConverter("Discipline", class="App\Entity\Discipline")
+     */
+    public function deleteDiscipline(Discipline $discipline, ObjectManager $objectManager){
+
+        $objectManager->remove($discipline);
+        $objectManager->flush();
+        return $this->create();
+
+    }
+
+
 }
