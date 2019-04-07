@@ -31,3 +31,7 @@ yarn run encore dev --watch
 Laissez tourner la console pour que vos changements soient pris en compte !
 
 Pour plus d'infos voir : https://symfony.com/doc/current/frontend/encore/installation.html
+
+Pour créer un utilisateur avec le role d'admin créer un nouvel utilisateur normalement en utilisant l'inscription du site puis aller dans votre base de donnée pour modifier la colonne role de l'user en question et en le modifiant comme ce qu'il suit :
+
+`["ROLE_ADMIN"]`
