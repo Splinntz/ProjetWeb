@@ -12,9 +12,11 @@ namespace App\Controller;
 use App\Entity\Advert;
 use App\Entity\Discipline;
 use Elastica\Processor\Date;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class HomepageController extends AbstractController
@@ -78,4 +80,6 @@ class HomepageController extends AbstractController
             'advutilisateur'=>$this->user->getAdverts()]);
 
     }
+
+
 }

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EasyAd - Gestion des tchats{% endblock %}
+
+{% block body %}
+
+    <h1>Liste des tchats</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">
+                Annonceur
+            </th>
+            <th scope="col">
+                Demandeur
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tchat in listTchats %}
+            <tr>
+                <th scope="col">{{ tchat.user1.login }}</th>
+                <th scope="col">{{ tchat.userAux.login }}</th>
+                <th scope="col"><a role="button" class="btn btn-secondary m-1" href="/tchatAux/{{ tchat.id }}">Voir le tchat</a></th>
+                <th scope="col"><a role="button" class="btn btn-danger m-1" href="/admin/deleteTchat/{{ tchat.id }}">Supprimer</a></th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

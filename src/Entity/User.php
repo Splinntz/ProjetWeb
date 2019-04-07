@@ -155,7 +155,10 @@ class User implements UserInterface
 
         return $this;
     }
-   
+
+    /**
+    * @ORM\Column(type="json")
+    */
     private $roles = [];
 
     /**
