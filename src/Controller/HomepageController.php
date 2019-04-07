@@ -81,18 +81,5 @@ class HomepageController extends AbstractController
 
     }
 
-    /**
-     * @Route("/homePage/removediscipline/{id}")
-     * @ParamConverter("Discipline", class="App\Entity\Discipline")
-     */
-    public function removeDiscipline(Discipline $discipline, ObjectManager $objectManager)
-    {
-        $objectManager->remove($discipline);
-        $objectManager->flush();
-        if ($this->isGranted('ROLE_ADMIN'))
-        {
-            return $this->redirectToRoute('homepage');
-        } else
-            return $this->redirectToRoute('advertRead');
-    }
+
 }
